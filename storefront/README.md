@@ -101,6 +101,18 @@ yarn dev
 
 Your site is now running at http://localhost:8000!
 
+> **Note**: If you make changes to `.env.local` or `next.config.js`, you must restart the server for changes to take effect. Stop the process (Ctrl+C) and run `npm run dev` again.
+
+# Style Guide & Customization
+
+### Images
+To customize the look of your store, you can replace the following files in the `public/` directory:
+
+- **Logo**: Replace `public/profilePic.png` with your own logo image.
+- **Hero Background**: Replace `public/waterlike-heroimage.png` with your desired background image.
+
+Ensure your new images use the same filenames to avoid code changes, or update the references in `src/modules/layout/templates/nav/index.tsx` (for logo) and `src/modules/home/components/hero/index.tsx` (for hero).
+
 # File Storage Integration
 
 By default, this starter supports MinIO for file storage with a fallback to local storage. To enable MinIO:

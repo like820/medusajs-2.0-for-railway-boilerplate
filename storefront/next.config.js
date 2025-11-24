@@ -18,7 +18,7 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "localhost",
-        
+
       },
       { // Note: needed to serve images from /public folder
         protocol: process.env.NEXT_PUBLIC_BASE_URL?.startsWith('https') ? 'https' : 'http',
@@ -44,6 +44,10 @@ const nextConfig = {
         protocol: "https",
         hostname: process.env.NEXT_PUBLIC_MINIO_ENDPOINT,
       }] : []),
+      {
+        protocol: "https",
+        hostname: "bucket-production-94ae.up.railway.app",
+      },
     ],
   },
   serverRuntimeConfig: {

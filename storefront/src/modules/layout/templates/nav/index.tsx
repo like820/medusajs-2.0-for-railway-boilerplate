@@ -26,7 +26,7 @@ export default async function Nav() {
               data-testid="nav-store-link"
             >
               <img
-                src="/waterlike-logo.webp"
+                src="/profilePic.png"
                 alt="waterlike shop"
                 className="h-8 w-auto"
               />
