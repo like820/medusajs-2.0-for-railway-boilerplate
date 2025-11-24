@@ -69,15 +69,15 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "Source Sans 3",
+          "var(--font-sans)",
           "sans-serif",
         ],
         serif: [
-          "Source Serif 4",
+          "var(--font-serif)",
           "serif",
         ],
         mono: [
-          "Source Code Pro",
+          "var(--font-mono)",
           "monospace",
         ],
       },

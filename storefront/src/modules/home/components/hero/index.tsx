@@ -3,12 +3,19 @@ import { Button, Heading } from "@medusajs/ui"
 
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-waterlike-blue relative bg-waterlike-gray">
+    <div className="h-[75vh] w-full border-b border-waterlike-blue relative bg-waterlike-gray overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/waterlike-heroimage.png"
+          alt="Waterlike Hero"
+          className="w-full h-full object-cover wet opacity-50"
+        />
+      </div>
       <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
         <span>
           <Heading
             level="h1"
-            className="text-3xl leading-10 text-waterlike-blue font-normal wet font-serif mb-4"
+            className="text-3xl leading-10 text-waterlike-blue font-normal font-serif mb-4"
           >
             waterlike™ shop
           </Heading>
@@ -23,7 +30,7 @@ const Hero = () => {
           href="https://waterlike.tools/tools/"
           target="_blank"
         >
-          <h1 style={{ textDecoration: "underline" }} className="font-mono text-base">
+          <h1 style={{ textDecoration: "underline" }} className="font-mono text-base text-waterlike-blue">
             Visit the tools
           </h1>
         </a>

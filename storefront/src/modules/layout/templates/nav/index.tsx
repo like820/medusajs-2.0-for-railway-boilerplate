@@ -25,7 +25,11 @@ export default async function Nav() {
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase font-mono"
               data-testid="nav-store-link"
             >
-              <img src="/waterlike-logo.webp" alt="waterlike shop" className="h-8 w-auto" />
+              <img
+                src="/waterlike-logo.webp"
+                alt="waterlike shop"
+                className="h-8 w-auto"
+              />
             </LocalizedClientLink>
           </div>
 
