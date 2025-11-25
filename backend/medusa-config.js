@@ -131,12 +131,12 @@ const medusaConfig = {
             },
           },
           {
-            resolve: 'medusa-payment-paypal',
+            resolve: '@rd1988/medusa-payment-paypal',
             id: 'paypal',
             options: {
               clientId: process.env.PAYPAL_CLIENT_ID,
               clientSecret: process.env.PAYPAL_CLIENT_SECRET,
-              sandbox: process.env.PAYPAL_SANDBOX === 'true',
+              isSandbox: process.env.PAYPAL_SANDBOX === 'true',
             },
           },
         ],
