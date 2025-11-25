@@ -56,6 +56,9 @@ importers:
       awilix:
         specifier: ^8.0.1
         version: 8.0.1
+      medusa-payment-paypal:
+        specifier: ^6.0.5
+        version: 6.0.5(@medusajs/medusa@2.10.2(j6bilunnebxcf2plhyolmb3fva))
       medusajs-launch-utils:
         specifier: 0.0.18
         version: 0.0.18
@@ -1973,6 +1976,15 @@ packages:
   '@opentelemetry/api@1.9.0':
     resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
     engines: {node: '>=8.0.0'}
+
+  '@paypal/checkout-server-sdk@1.0.3':
+    resolution: {integrity: sha512-UEdq8akEdMz0Vs4qoQFU2gMp8PpyE/HKyMwiZuK4vIWUKl8jfd1fWKjQN5cDFm9NkFUIp5U7h++rdMOVj9WMNA==}
+    engines: {node: '>=8'}
+    deprecated: 'Package no longer supported. The author suggests using the @paypal/paypal-server-sdk package instead: https://www.npmjs.com/package/@paypal/paypal-server-sdk. Contact Support at https://www.npmjs.com/support for more info.'
+
+  '@paypal/paypalhttp@1.0.1':
+    resolution: {integrity: sha512-DC7AHxTT7drF6dUi3YaFdPVuT15sIkpD5H2eHmdtFgxM4UanS1o1ZDfMhR9mpxd8o+X6pz2r+EZVRRq+n1cssQ==}
+    engines: {node: '>=4'}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -5834,6 +5846,16 @@ packages:
   media-typer@0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
+
+  medusa-core-utils@1.2.3:
+    resolution: {integrity: sha512-mNUqWh8G7BF9dcxt3t22GtSJrm4pfpU98QzvNgpqAvirVbBI4lOCpDQGoKE+jMHOLQJHrLQFoSJeqcofDJvEgA==}
+    engines: {node: '>=16'}
+
+  medusa-payment-paypal@6.0.5:
+    resolution: {integrity: sha512-nI9uMt1wUw+zpiIQ6I7EKZ/9Zz2Wu5z8s+HiQG99xyeCoTcxGZ3KVQ7fRe4WpYPvesVQwT1IH/FWtf5Vfbr39g==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@medusajs/medusa': ^1.12.0
 
   medusajs-launch-utils@0.0.18:
     resolution: {integrity: sha512-ReJT1qpYMnoIvkFls5Mzn1bzacLtxZQpsit+bTwt5LzrnqDODzWDzRiUYaV66n359La1VfK3prMghoM3k/kFxA==}
@@ -9980,6 +10002,12 @@ snapshots:
   '@one-ini/wasm@0.1.1': {}
 
   '@opentelemetry/api@1.9.0': {}
+
+  '@paypal/checkout-server-sdk@1.0.3':
+    dependencies:
+      '@paypal/paypalhttp': 1.0.1
+
+  '@paypal/paypalhttp@1.0.1': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -14769,6 +14797,22 @@ snapshots:
   meant@1.0.3: {}
 
   media-typer@0.3.0: {}
+
+  medusa-core-utils@1.2.3:
+    dependencies:
+      awilix: 8.0.1
+
+  medusa-payment-paypal@6.0.5(@medusajs/medusa@2.10.2(j6bilunnebxcf2plhyolmb3fva)):
+    dependencies:
+      '@medusajs/medusa': 2.10.2(j6bilunnebxcf2plhyolmb3fva)
+      '@paypal/checkout-server-sdk': 1.0.3
+      axios: 1.11.0
+      body-parser: 1.20.3
+      express: 4.21.2
+      medusa-core-utils: 1.2.3
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   medusajs-launch-utils@0.0.18:
     dependencies:
