@@ -220,7 +220,7 @@ const PayPalPaymentButton = ({
     actions: OnApproveActions
   ) => {
     actions?.order
-      ?.authorize()
+      ?.capture()
       .then((authorization) => {
         if (authorization.status !== "COMPLETED") {
           setErrorMessage(`An error occurred, status: ${authorization.status}`)
