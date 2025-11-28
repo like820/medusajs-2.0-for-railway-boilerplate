@@ -85,16 +85,21 @@ const Payment = ({
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      const shouldInputCard =
-        isStripeFunc(selectedPaymentMethod) && !activeSession
+      const shouldInputCard = isStripeFunc(selectedPaymentMethod)
 
-      if (!activeSession) {
+      const sessionChanged = !activeSession || activeSession.provider_id !== selectedPaymentMethod
+
+      if (sessionChanged) {
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
         })
       }
 
-      if (!shouldInputCard) {
+      if (shouldInputCard && sessionChanged) {
+        return
+      }
+
+      if (!shouldInputCard || !sessionChanged) {
         return router.push(
           pathname + "?" + createQueryString("step", "review"),
           {
@@ -175,7 +180,7 @@ const Payment = ({
                     onChange={(e) => {
                       setCardBrand(
                         e.brand &&
-                          e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
+                        e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
                       )
                       setError(e.error?.message || null)
                       setCardComplete(e.complete)
@@ -216,8 +221,8 @@ const Payment = ({
             }
             data-testid="submit-payment-button"
           >
-            {!activeSession && isStripeFunc(selectedPaymentMethod)
-              ? " Enter card details"
+            {isStripeFunc(selectedPaymentMethod) && (!isStripe || !cardComplete)
+              ? "Enter card details"
               : "Continue to review"}
           </Button>
         </div>
