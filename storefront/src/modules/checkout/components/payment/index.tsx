@@ -93,20 +93,27 @@ const Payment = ({
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
         })
+
+        // Trigger a refresh to update the cart prop in the parent and this component
+        router.refresh()
       }
 
+      // If we switched to Stripe, we need to wait for the refresh to render the CardElement
+      // The button text will change to "Enter card details" and the form will appear
       if (shouldInputCard && sessionChanged) {
         return
       }
 
-      if (!shouldInputCard || !sessionChanged) {
-        return router.push(
-          pathname + "?" + createQueryString("step", "review"),
-          {
-            scroll: false,
-          }
-        )
-      }
+      // If we are here, either:
+      // 1. It's not Stripe (PayPal, Manual)
+      // 2. It IS Stripe, but the session was already active (so we are proceeding to review)
+
+      router.push(
+        pathname + "?" + createQueryString("step", "review"),
+        {
+          scroll: false,
+        }
+      )
     } catch (err: any) {
       setError(err.message)
     } finally {
