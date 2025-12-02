@@ -13,7 +13,7 @@ import {
   SENDGRID_FROM_EMAIL,
   SHOULD_DISABLE_ADMIN,
   STORE_CORS,
-  STRIPE_API_KEY,
+  STRIPE_SECRET_KEY,
   STRIPE_WEBHOOK_SECRET,
   WORKER_MODE,
   MINIO_ENDPOINT,
@@ -122,11 +122,11 @@ const medusaConfig = {
       resolve: '@medusajs/payment',
       options: {
         providers: [
-          ...(STRIPE_API_KEY && STRIPE_WEBHOOK_SECRET ? [{
+          ...(STRIPE_SECRET_KEY && STRIPE_WEBHOOK_SECRET ? [{
             resolve: '@medusajs/payment-stripe',
             id: 'stripe',
             options: {
-              apiKey: STRIPE_API_KEY,
+              apiKey: STRIPE_SECRET_KEY,
               webhookSecret: STRIPE_WEBHOOK_SECRET,
             },
           }] : []),
