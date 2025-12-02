@@ -19,8 +19,12 @@ const fetchCart = async () => {
   }
 
   if (cart?.items?.length) {
-    const enrichedItems = await enrichLineItems(cart?.items, cart?.region_id!)
-    cart.items = enrichedItems as HttpTypes.StoreCartLineItem[]
+    try {
+      const enrichedItems = await enrichLineItems(cart?.items, cart?.region_id!)
+      cart.items = enrichedItems as HttpTypes.StoreCartLineItem[]
+    } catch (e) {
+      console.error("Error enriching line items:", e)
+    }
   }
 
   return cart
