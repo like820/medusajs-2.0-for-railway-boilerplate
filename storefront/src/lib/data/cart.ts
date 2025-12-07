@@ -219,13 +219,18 @@ export async function initiatePaymentSession(
     context?: Record<string, unknown>
   }
 ) {
+  console.log("Initiating payment session with data:", data)
   return sdk.store.payment
     .initiatePaymentSession(cart, data, {}, getAuthHeaders())
     .then((resp) => {
+      console.log("Payment session initiated successfully:", resp)
       revalidateTag("cart")
       return resp
     })
-    .catch(medusaError)
+    .catch((err) => {
+      console.error("Error initiating payment session:", err)
+      throw medusaError(err)
+    })
 }
 
 export async function applyPromotions(codes: string[]) {

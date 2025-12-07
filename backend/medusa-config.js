@@ -129,6 +129,38 @@ const medusaConfig = {
               apiKey: STRIPE_SECRET_KEY,
               webhookSecret: STRIPE_WEBHOOK_SECRET,
             },
+          },
+          {
+            resolve: '@medusajs/payment-stripe',
+            id: 'stripe-bancontact',
+            options: {
+              apiKey: STRIPE_SECRET_KEY,
+              webhookSecret: STRIPE_WEBHOOK_SECRET,
+            },
+          },
+          {
+            resolve: '@medusajs/payment-stripe',
+            id: 'stripe-ideal',
+            options: {
+              apiKey: STRIPE_SECRET_KEY,
+              webhookSecret: STRIPE_WEBHOOK_SECRET,
+            },
+          },
+          {
+            resolve: '@medusajs/payment-stripe',
+            id: 'stripe-bancontact',
+            options: {
+              apiKey: STRIPE_SECRET_KEY,
+              webhookSecret: STRIPE_WEBHOOK_SECRET,
+            },
+          },
+          {
+            resolve: '@medusajs/payment-stripe',
+            id: 'stripe-ideal',
+            options: {
+              apiKey: STRIPE_SECRET_KEY,
+              webhookSecret: STRIPE_WEBHOOK_SECRET,
+            },
           }] : []),
           {
             resolve: '@rd1988/medusa-payment-paypal',
