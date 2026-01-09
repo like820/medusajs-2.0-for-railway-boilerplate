@@ -96,11 +96,6 @@ const Payment = ({
 
         // Trigger a refresh to update the cart prop in the parent and this component
         router.refresh()
-      }
-
-      // If we switched to Stripe, we need to wait for the refresh to render the CardElement
-      // The button text will change to "Enter card details" and the form will appear
-      if (shouldInputCard && sessionChanged) {
         return
       }
 
