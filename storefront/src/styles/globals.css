@@ -103,6 +103,12 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
+
+  .backdrop-blur-2xl {
+    --tw-backdrop-blur: blur(6px);
+    backdrop-filter: var(--tw-backdrop-blur);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur);
+  }
 }
 
 @layer components {
