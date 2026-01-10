@@ -40,7 +40,9 @@ const Payment = ({
 
   const isOpen = searchParams.get("step") === "payment"
 
-  const isStripe = isStripeFunc(activeSession?.provider_id)
+  const isStripeActive = isStripeFunc(activeSession?.provider_id)
+  const isStripeSelected = isStripeFunc(selectedPaymentMethod)
+
   const stripeReady = useContext(StripeContext)
 
   const paidByGiftcard =
@@ -49,6 +51,7 @@ const Payment = ({
   const paymentReady =
     (activeSession && cart?.shipping_methods.length !== 0) || paidByGiftcard
 
+  // ... (keeping useOptions same) ...
   const useOptions: StripeCardElementOptions = useMemo(() => {
     return {
       style: {
@@ -171,7 +174,7 @@ const Payment = ({
                     )
                   })}
               </RadioGroup>
-              {isStripe && stripeReady && (
+              {isStripeActive && isStripeSelected && stripeReady && (
                 <div className="mt-5 transition-all duration-150 ease-in-out">
                   <Text className="txt-medium-plus text-ui-fg-base mb-1">
                     Enter your card details:
@@ -218,12 +221,12 @@ const Payment = ({
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={
-              (isStripe && !cardComplete) ||
+              (isStripeActive && isStripeSelected && !cardComplete) ||
               (!selectedPaymentMethod && !paidByGiftcard)
             }
             data-testid="submit-payment-button"
           >
-            {isStripeFunc(selectedPaymentMethod) && (!isStripe || !cardComplete)
+            {isStripeFunc(selectedPaymentMethod) && (!isStripeActive || !cardComplete)
               ? "Enter card details"
               : "Continue to review"}
           </Button>
