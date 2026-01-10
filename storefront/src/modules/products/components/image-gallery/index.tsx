@@ -6,6 +6,11 @@ type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
 }
 
+const sanitizeImageUrl = (url: string) => {
+  if (!url) return url
+  return url.replace(/\+/g, "%20")
+}
+
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex items-start relative">
@@ -19,7 +24,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             >
               {!!image.url && (
                 <Image
-                  src={image.url}
+                  src={sanitizeImageUrl(image.url)}
                   priority={index <= 2 ? true : false}
                   className="absolute inset-0 rounded-rounded"
                   alt={`Product image ${index + 1}`}

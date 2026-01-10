@@ -14,6 +14,12 @@ type ThumbnailProps = {
   "data-testid"?: string
 }
 
+const sanitizeImageUrl = (url: string) => {
+  if (!url) return url
+  // Replace all occurrences of '+' with '%20'
+  return url.replace(/\+/g, "%20")
+}
+
 const Thumbnail: React.FC<ThumbnailProps> = ({
   thumbnail,
   images,
@@ -22,7 +28,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   className,
   "data-testid": dataTestid,
 }) => {
-  const initialImage = thumbnail || images?.[0]?.url
+  const initialImage = sanitizeImageUrl(thumbnail || images?.[0]?.url)
 
   return (
     <Container
