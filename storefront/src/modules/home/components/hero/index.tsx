@@ -2,10 +2,23 @@
 
 import { Github } from "@medusajs/icons"
 import { Button, Heading } from "@medusajs/ui"
-import { useRef, MouseEvent } from "react"
+import { useRef, MouseEvent, useEffect, useState } from "react"
 
 const Hero = () => {
   const cardRef = useRef<HTMLDivElement>(null)
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+
+    // Set initial scroll
+    handleScroll()
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return
@@ -18,14 +31,26 @@ const Hero = () => {
     const y = (clientY - innerHeight / 2) / (innerHeight / 2)
 
     // Apply tilt: limited to 5 degrees for a "slight" effect
-    cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`
+    cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(${scrollY * 0.5}px)`
   }
 
   const handleMouseLeave = () => {
     if (cardRef.current) {
-      cardRef.current.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg)"
+      // Keep the scroll translation even when mouse leaves
+      cardRef.current.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(${scrollY * 0.5}px)`
     }
   }
+
+  // Update transform on scroll if no mouse interaction is happening (simple optimization)
+  useEffect(() => {
+    if (cardRef.current) {
+      // This might conflict with mouse hover, but for major scroll movements it keeps it in sync
+      const currentTransform = cardRef.current.style.transform
+      if (!currentTransform.includes("rotate")) {
+        cardRef.current.style.transform = `translateY(${scrollY * 0.5}px)`
+      }
+    }
+  }, [scrollY])
 
   return (
     <div
@@ -38,11 +63,17 @@ const Hero = () => {
           src="/waterlike-heroimage.png"
           alt="Waterlike Hero"
           className="w-full h-full object-cover"
+          style={{
+            transform: `translateY(${scrollY * 0.2}px)` // Parallax for background
+          }}
         />
       </div>
       <div
         ref={cardRef}
-        className="z-10 flex flex-col items-center gap-6 bg-white/60 backdrop-blur-2xl border border-waterlike-blue p-8 shadow-lg transition-transform duration-75 ease-out will-change-transform m-8"
+        style={{
+          transform: `translateY(${scrollY * 0.5}px)`, // Parallax for card
+        }}
+        className="z-10 flex flex-col items-center gap-6 bg-white/60 backdrop-blur-2xl border border-waterlike-blue p-8 shadow-lg transition-transform duration-75 ease-out will-change-transform m-8 rounded-rounded"
       >
         <span>
           <Heading
