@@ -3,10 +3,13 @@
 import { Github } from "@medusajs/icons"
 import { Button, Heading } from "@medusajs/ui"
 import { useRef, MouseEvent, useEffect, useState } from "react"
+import { useMenu } from "@lib/context/menu-context"
+import { clx } from "@medusajs/ui"
 
 const Hero = () => {
   const cardRef = useRef<HTMLDivElement>(null)
   const [scrollY, setScrollY] = useState(0)
+  const { isMenuOpen } = useMenu()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +76,10 @@ const Hero = () => {
         style={{
           transform: `translateY(${scrollY * 0.5}px)`, // Parallax for card
         }}
-        className="z-10 flex flex-col items-center gap-6 bg-white/60 backdrop-blur-2xl border border-waterlike-blue p-8 shadow-lg transition-transform duration-75 ease-out will-change-transform m-8 rounded-rounded"
+        className={clx(
+          "z-10 flex flex-col items-center gap-6 bg-white/60 backdrop-blur-2xl border border-waterlike-blue p-8 shadow-lg transition-all duration-1000 ease-out will-change-transform m-8 rounded-rounded",
+          isMenuOpen ? "opacity-0 translate-y-4 pointer-events-none" : "opacity-100"
+        )}
       >
         <span>
           <Heading
@@ -86,7 +92,7 @@ const Hero = () => {
             level="h2"
             className="text-xl md:text-2xl leading-10 text-waterlike-blue font-normal font-serif"
           >
-            .waterlike
+            waterlike
           </Heading>
         </span>
         <a
