@@ -38,7 +38,10 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 <div className="relative flex h-full">
                   <Popover.Button
                     data-testid="nav-menu-button"
-                    className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
+                    className={clx(
+                      "relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base",
+                      { "opacity-0": open }
+                    )}
                   >
                     Menu
                   </Popover.Button>
@@ -47,12 +50,12 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 <Transition
                   show={open}
                   as={Fragment}
-                  enter="transition ease-out duration-1000"
-                  enterFrom="opacity-0"
+                  enter="transition ease-out duration-300"
+                  enterFrom="opacity-0 backdrop-blur-none"
                   enterTo="opacity-100 backdrop-blur-2xl"
-                  leave="transition ease-in duration-1000"
-                  leaveFrom="opacity-100 backdrop-blur-2xl"
-                  leaveTo="opacity-0"
+                  leave="transition-all ease-in duration-200"
+                  leaveFrom="opacity-100 backdrop-blur-2xl blur-0"
+                  leaveTo="opacity-0 blur-md"
                 >
                   <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-waterlike-blue m-2 backdrop-blur-2xl">
                     <div

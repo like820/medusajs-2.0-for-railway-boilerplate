@@ -25,7 +25,16 @@ const Hero = () => {
         // Ensure no transition lag during scroll
         cardRef.current.style.transition = "none"
         const rotation = Math.min(scrollY.current / 10, 10) // Max 10 deg rotation
+
+        // Calculate fade and blur
+        // Opacity goes from 1 to 0 over 300px
+        const opacity = Math.max(0, 1 - scrollY.current / 300)
+        // Blur goes from 0 to 10px over 300px
+        const blur = Math.min(10, (scrollY.current / 300) * 10)
+
         cardRef.current.style.transform = `perspective(1000px) rotateX(${rotation}deg) translateY(${scrollY.current * 0.5}px)`
+        cardRef.current.style.opacity = opacity.toString()
+        cardRef.current.style.filter = `blur(${blur}px)`
       }
     }
 
