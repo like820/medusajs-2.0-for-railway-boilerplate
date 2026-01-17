@@ -59,7 +59,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                       data-testid="nav-menu-popup"
                       className="flex flex-col h-full bg-white/60 backdrop-blur-2xl border border-waterlike-blue rounded-rounded justify-between p-6"
                     >
-                      <div className="flex justify-end" id="xmark">
+                      <div className="flex justify-start" id="xmark">
                         <button data-testid="close-menu-button" onClick={close}>
                           <XMark />
                         </button>
