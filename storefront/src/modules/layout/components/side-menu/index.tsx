@@ -47,10 +47,10 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 <Transition
                   show={open}
                   as={Fragment}
-                  enter="transition ease-out duration-150"
+                  enter="transition ease-out duration-1000"
                   enterFrom="opacity-0"
                   enterTo="opacity-100 backdrop-blur-2xl"
-                  leave="transition ease-in duration-150"
+                  leave="transition ease-in duration-1000"
                   leaveFrom="opacity-100 backdrop-blur-2xl"
                   leaveTo="opacity-0"
                 >
@@ -81,24 +81,24 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         })}
                       </ul>
                       <div className="flex flex-col gap-y-6">
-                        <div
-                          className="flex justify-between"
-                          onMouseEnter={toggleState.open}
-                          onMouseLeave={toggleState.close}
-                        >
-                          {regions && (
+                        {regions && regions.length > 1 && (
+                          <div
+                            className="flex justify-between"
+                            onMouseEnter={toggleState.open}
+                            onMouseLeave={toggleState.close}
+                          >
                             <CountrySelect
                               toggleState={toggleState}
                               regions={regions}
                             />
-                          )}
-                          <ArrowRightMini
-                            className={clx(
-                              "transition-transform duration-150",
-                              toggleState.state ? "-rotate-90" : ""
-                            )}
-                          />
-                        </div>
+                            <ArrowRightMini
+                              className={clx(
+                                "transition-transform duration-150",
+                                toggleState.state ? "-rotate-90" : ""
+                              )}
+                            />
+                          </div>
+                        )}
                         <Text className="flex justify-between txt-compact-small">
                           © {new Date().getFullYear()} waterlike™ shop. All rights
                           reserved.
