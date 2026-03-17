@@ -1,0 +1,58 @@
+diff --git a/dist/service.js b/dist/service.js
+index cb849947a47a868cd5343b7b4048f32ff72f65b5..bc5d7a604b333384c8b9a5a2c56f0dbf9cfa4aec 100644
+--- a/dist/service.js
++++ b/dist/service.js
+@@ -59,7 +59,7 @@ class PayPalProviderService extends utils_1.AbstractPaymentProvider {
+             purchase_units: [{
+                     amount: {
+                         currency_code: currency_code.toUpperCase(),
+-                        value: (amount / 100).toFixed(2) // cents to dollars
++                        value: amount.toFixed(2) // standard units in Medusa v2
+                     },
+                     custom_id: data?.session_id || undefined
+                 }],
+@@ -178,7 +178,7 @@ class PayPalProviderService extends utils_1.AbstractPaymentProvider {
+             request.requestBody({
+                 amount: {
+                     currency_code: currencyCode.toUpperCase(),
+-                    value: (amount / 100).toFixed(2)
++                    value: amount.toFixed(2)
+                 },
+                 invoice_id: "", // PayPal SDK 要求的字段
+                 note_to_payer: "" // PayPal SDK 要求的字段
+@@ -222,7 +222,7 @@ class PayPalProviderService extends utils_1.AbstractPaymentProvider {
+                     action: utils_1.PaymentActions.SUCCESSFUL,
+                     data: {
+                         session_id: resource?.custom_id,
+-                        amount: parseFloat(resource?.amount?.value || "0") * 100, // dollars to cents
++                        amount: parseFloat(resource?.amount?.value || "0"), // standard units in Medusa v2
+                     },
+                 };
+             case "PAYMENT.CAPTURE.DENIED":
+@@ -231,7 +231,7 @@ class PayPalProviderService extends utils_1.AbstractPaymentProvider {
+                     action: utils_1.PaymentActions.FAILED,
+                     data: {
+                         session_id: resource?.custom_id,
+-                        amount: parseFloat(resource?.amount?.value || "0") * 100,
++                        amount: parseFloat(resource?.amount?.value || "0"),
+                     },
+                 };
+             case "CHECKOUT.ORDER.APPROVED":
+@@ -239,7 +239,7 @@ class PayPalProviderService extends utils_1.AbstractPaymentProvider {
+                     action: utils_1.PaymentActions.AUTHORIZED,
+                     data: {
+                         session_id: resource?.purchase_units?.[0]?.custom_id,
+-                        amount: parseFloat(resource?.purchase_units?.[0]?.amount?.value || "0") * 100,
++                        amount: parseFloat(resource?.purchase_units?.[0]?.amount?.value || "0"),
+                     },
+                 };
+             case "PAYMENT.CAPTURE.REFUNDED":
+@@ -247,7 +247,7 @@ class PayPalProviderService extends utils_1.AbstractPaymentProvider {
+                     action: utils_1.PaymentActions.SUCCESSFUL, // 退款成功也算成功
+                     data: {
+                         session_id: resource?.custom_id,
+-                        amount: parseFloat(resource?.amount?.value || "0") * 100,
++                        amount: parseFloat(resource?.amount?.value || "0"),
+                     },
+                 };
+             default:
