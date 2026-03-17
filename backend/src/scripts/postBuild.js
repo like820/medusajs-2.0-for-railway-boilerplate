@@ -24,6 +24,16 @@ if (fs.existsSync(envPath)) {
   );
 }
 
+// Copy patches directory if it exists
+const patchesPath = path.join(process.cwd(), 'patches');
+if (fs.existsSync(patchesPath)) {
+  fs.cpSync(
+    patchesPath,
+    path.join(MEDUSA_SERVER_PATH, 'patches'),
+    { recursive: true }
+  );
+}
+
 // Install dependencies
 console.log('Installing dependencies in .medusa/server...');
 execSync('pnpm i --prod --frozen-lockfile', { 
