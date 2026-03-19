@@ -191,4 +191,8 @@
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
   }
+
+  .h2-core {
+    line-height: 3.5rem !important;
+  }
 }
