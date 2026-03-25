@@ -35,8 +35,8 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
-        "waterlike-blue": "#004282",
-        "waterlike-gray": "#ebebeb",
+        "waterlike-blue": "var(--user-text)",
+        "waterlike-gray": "var(--user-bg)",
       },
       borderRadius: {
         none: "0px",

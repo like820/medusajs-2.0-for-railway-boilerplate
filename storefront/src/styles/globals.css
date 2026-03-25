@@ -29,16 +29,42 @@
   /* Background color */
 
   /* Override Medusa UI Colors to be Blue-based */
-  --fg-base: #004282;
+  --fg-base: var(--main);
   --fg-subtle: #4d7ba7;
   /* Lighter blue */
   --fg-muted: #80a0c0;
   /* Even lighter blue */
   --fg-disabled: #b3c6da;
 
+  --user-bg: var(--back);
+  --user-text: var(--main);
+
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root, .dark {
+    /* Swap text and background */
+    --user-bg: #004282;
+    --user-text: #ebebeb;
+
+    /* Override Medusa UI Colors for Dark Mode */
+    --fg-base: #ebebeb;
+    --fg-subtle: #b3c6da;
+    --fg-muted: #80a0c0;
+    --fg-disabled: #4d7ba7;
+    
+    /* Force Medusa UI backgrounds to dark blue */
+    --bg-base: #004282;
+    --bg-subtle: #00366b;
+    --ui-bg-base: #004282;
+    --ui-bg-subtle: #00366b;
+    --ui-bg-component: #00366b;
+    --ui-bg-interactive: #ebebeb;
+    --ui-fg-interactive: #004282;
+  }
 }
 
 @layer base {
